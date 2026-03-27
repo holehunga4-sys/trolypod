@@ -103,6 +103,87 @@
             margin: 0 auto;
         }
 
+        /* ===== PRO UNLOCK BOX ===== */
+        .pro-unlock {
+            margin-bottom: 32px;
+            padding: 24px 22px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #7C3AED, #9333EA, #7C3AED);
+            background-size: 200% 200%;
+            animation: proGradient 4s ease infinite;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
+        }
+        @keyframes proGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .pro-unlock::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+        .pro-unlock::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        .pro-unlock-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pro-unlock-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .pro-unlock-list li {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pro-unlock-list li .check {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        .pro-unlock-list li strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
         /* ===== BENEFITS ===== */
         .benefits {
             display: grid;
@@ -117,7 +198,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
             font-size: 13px;
             font-weight: 600;
@@ -139,6 +220,22 @@
             justify-content: center;
             font-size: 18px;
             flex-shrink: 0;
+        }
+
+        .benefit-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .benefit-title {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .benefit-desc {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            line-height: 1.4;
         }
 
         /* ===== SECTION TITLE ===== */
@@ -498,28 +595,52 @@
 
         <!-- HEADER -->
         <header class="page-header">
-            <img src="icons/icon48.png" alt="Trợ Lý POD" class="page-logo">
+            <img src="icon48.png" alt="Trợ Lý POD" class="page-logo">
             <h1 class="page-title">Trợ Lý POD Premium</h1>
-            <p class="page-subtitle">Mở khoá sức mạnh quét ảnh không giới hạn, Deep Scan và nhiều tính năng PRO.</p>
+            <p class="page-subtitle">Công cụ quét ảnh sản phẩm #1 cho dân POD — Nhanh hơn, thông minh hơn, không giới hạn.</p>
         </header>
+
+        <!-- MỞ KHÓA SỨC MẠNH PRO -->
+        <div class="pro-unlock">
+            <div class="pro-unlock-title">MỞ KHÓA SỨC MẠNH PRO ⚡</div>
+            <ul class="pro-unlock-list">
+                <li><span class="check">✅</span> Quét <strong>không giới hạn</strong> số lượng sản phẩm</li>
+                <li><span class="check">✅</span> Tính năng <strong>Nâng cao</strong> — Quét toàn bộ + thứ tự hiển thị</li>
+                <li><span class="check">✅</span> <strong>Deep Scan</strong> — tải toàn bộ ảnh chi tiết</li>
+                <li><span class="check">✅</span> Phân tích chiến lược (CL) — <strong>sắp ra mắt</strong></li>
+                <li><span class="check">✅</span> Cập nhật tính năng mới <strong>miễn phí</strong></li>
+            </ul>
+        </div>
 
         <!-- BENEFITS -->
         <div class="benefits">
             <div class="benefit">
                 <span class="benefit-icon">🚀</span>
-                Quét không giới hạn
+                <div class="benefit-text">
+                    <span class="benefit-title">Quét Siêu Tốc</span>
+                    <span class="benefit-desc">Không giới hạn số sản phẩm, quét hàng nghìn ảnh cùng lúc</span>
+                </div>
             </div>
             <div class="benefit">
                 <span class="benefit-icon">🔬</span>
-                Deep Scan chi tiết
+                <div class="benefit-text">
+                    <span class="benefit-title">Deep Scan Pro</span>
+                    <span class="benefit-desc">Tải toàn bộ ảnh HD chi tiết từ trang sản phẩm</span>
+                </div>
             </div>
             <div class="benefit">
                 <span class="benefit-icon">⚡</span>
-                Tính năng Nâng cao
+                <div class="benefit-text">
+                    <span class="benefit-title">Nâng Cao Toàn Diện</span>
+                    <span class="benefit-desc">Quét theo thứ tự, ZIP, chuyển đổi PNG, và hơn thế</span>
+                </div>
             </div>
             <div class="benefit">
                 <span class="benefit-icon">🔄</span>
-                Cập nhật miễn phí
+                <div class="benefit-text">
+                    <span class="benefit-title">Update Trọn Đời</span>
+                    <span class="benefit-desc">Nhận tất cả bản cập nhật mới hoàn toàn miễn phí</span>
+                </div>
             </div>
         </div>
 
