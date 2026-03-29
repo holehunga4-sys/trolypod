@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Lê Hưng – Nhà Phát Triển Tool POD & Design</title>
+    <meta name="description" content="Profile nhà phát triển Hồ Lê Hưng – Tác giả Trợ Lý POD và các công cụ hỗ trợ POD / Design chuyên nghiệp.">
+    <link rel="icon" href="https://holehunga4-sys.github.io/trolypod/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a12;
+            --bg-card: #12121e;
+            --bg-elevated: #1a1a2e;
+            --border: rgba(255,255,255,0.06);
+            --text: #e8e8f0;
+            --text-dim: #8888a8;
+            --accent: #8B5CF6;
+            --accent-glow: rgba(139,92,246,0.3);
+            --cyan: #06d6a0;
+            --pink: #ff6b9d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated BG */
+        .bg-glow {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: glowPulse 6s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HERO / PROFILE */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 40px;
+        }
+        .avatar-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            object-fit: cover;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+        }
+        .avatar-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px var(--accent-glow);
+        }
+        .hero-name {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff 30%, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-title {
+            font-size: 14px;
+            color: var(--text-dim);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .hero-bio {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto 28px;
+        }
+
+        /* Social links */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            transition: all 0.25s;
+        }
+        .social-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .social-link svg { flex-shrink: 0; }
+        .social-fb { border-color: rgba(66,103,178,0.3); }
+        .social-fb:hover { border-color: #4267B2; box-shadow: 0 0 15px rgba(66,103,178,0.3); }
+        .social-tg { border-color: rgba(0,136,204,0.3); }
+        .social-tg:hover { border-color: #0088cc; box-shadow: 0 0 15px rgba(0,136,204,0.3); }
+        .social-zalo { border-color: rgba(0,168,255,0.3); }
+        .social-zalo:hover { border-color: #00a8ff; box-shadow: 0 0 15px rgba(0,168,255,0.3); }
+
+        /* SECTION */
+        .section {
+            margin-top: 48px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .section-icon {
+            font-size: 22px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        /* PRODUCT CARDS */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .product-card:hover {
+            border-color: rgba(139,92,246,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .product-card:hover::before { opacity: 1; }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .product-info { flex: 1; min-width: 0; }
+        .product-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+        .product-tag {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .product-desc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .product-feat {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            background: var(--bg-elevated);
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+        }
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+        }
+        .product-btn-primary {
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .product-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+        .product-btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .product-btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        /* IMAGE PLACEHOLDER */
+        .product-img {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-size: 12px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            position: relative;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 48px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 14px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        .profile-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-text {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        .footer-heart {
+            color: var(--pink);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero-name { font-size: 22px; }
+            .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .stat-card { padding: 14px 8px; }
+            .stat-value { font-size: 20px; }
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .fade-in:nth-child(2) { animation-delay: 0.1s; }
+        .fade-in:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in:nth-child(4) { animation-delay: 0.3s; }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero fade-in">
+            <div class="avatar-wrap">
+                <div class="avatar">👨‍💻</div>
+                <span class="avatar-badge">DEV</span>
+            </div>
+            <h1 class="hero-name">Hồ Lê Hưng</h1>
+            <p class="hero-title">Nhà phát triển Tool POD & Design</p>
+            <p class="hero-bio">
+                Xin chào! Mình là Hưng – đam mê xây dựng các công cụ thực tế giúp cộng đồng POD / Design làm việc hiệu quả hơn. 
+                Từ extension Chrome đến phần mềm desktop, mình luôn hướng đến sản phẩm dễ dùng, mạnh mẽ và đẹp mắt.
+            </p>
+
+            <div class="social-row">
+                <a href="https://www.facebook.com/hung.hole.58/" class="social-link social-fb" target="_blank" rel="noopener noreferrer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://t.me/holehunga4" class="social-link social-tg" target="_blank" rel="noopener noreferrer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+                    Telegram
+                </a>
+                <a href="https://zalo.me/g/ngozis331" class="social-link social-zalo" target="_blank" rel="noopener noreferrer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Cộng Đồng
+                </a>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row fade-in">
+            <div class="stat-card">
+                <div class="stat-value">3+</div>
+                <div class="stat-label">Sản phẩm</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">500+</div>
+                <div class="stat-label">Người dùng</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2026</div>
+                <div class="stat-label">Hoạt động</div>
+            </div>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="section fade-in">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <span class="section-title">Sản phẩm & Công cụ</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="product-grid">
+                <!-- Trợ Lý POD -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon">🤖</div>
+                        <div class="product-info">
+                            <div class="product-name">Trợ Lý POD</div>
+                            <div class="product-tag">Chrome Extension · v3.0.0</div>
+                        </div>
+                    </div>
+                    <div class="product-img" id="imgTroLyPod">
+                        <span>📸 Hình sản phẩm sẽ cập nhật sau</span>
+                    </div>
+                    <p class="product-desc">
+                        Extension Chrome đa năng cho dân POD: quét ảnh sản phẩm hàng loạt, xóa nền AI, viết title SEO tự động bằng Gemini AI, 
+                        tải batch ảnh với tên file chuẩn. Hỗ trợ Etsy, Amazon, Shopee và nhiều nền tảng khác.
+                    </p>
+                    <div class="product-features">
+                        <span class="product-feat">🔍 Quét ảnh hàng loạt</span>
+                        <span class="product-feat">🎨 Xóa nền AI</span>
+                        <span class="product-feat">✍️ Viết Title AI</span>
+                        <span class="product-feat">📥 Batch download</span>
+                        <span class="product-feat">🔑 License system</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://holehunga4-sys.github.io/trolypod/" class="product-btn product-btn-primary" target="_blank" rel="noopener noreferrer">🛒 Mua ngay</a>
+                        <a href="https://zalo.me/g/ngozis331" class="product-btn product-btn-secondary" target="_blank" rel="noopener noreferrer">💬 Hỏi thêm</a>
+                    </div>
+                </div>
+
+                <!-- Upscale Photo Pro -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon">🖼️</div>
+                        <div class="product-info">
+                            <div class="product-name">Upscale Photo Pro</div>
+                            <div class="product-tag">Desktop App · Offline</div>
+                        </div>
+                    </div>
+                    <div class="product-img" id="imgUpscale">
+                        <span>📸 Hình sản phẩm sẽ cập nhật sau</span>
+                    </div>
+                    <p class="product-desc">
+                        Phần mềm nâng ảnh chuyên nghiệp bằng AI. Hỗ trợ 7+ model khác nhau cho từng loại ảnh, 
+                        phóng to 2x/4x/8x, xử lý offline, hàng đợi đa ảnh, Before/After xem kết quả.
+                    </p>
+                    <div class="product-features">
+                        <span class="product-feat">🔎 2x / 4x / 8x</span>
+                        <span class="product-feat">🎯 7+ AI Models</span>
+                        <span class="product-feat">⚡ Offline</span>
+                        <span class="product-feat">📂 Batch processing</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://drive.google.com/drive/folders/12t8LMR9UYrgkMP4kfmrKexjgye4nvwxt?usp=sharing" class="product-btn product-btn-primary" target="_blank" rel="noopener noreferrer">⬇️ Tải về</a>
+                    </div>
+                </div>
+
+                <!-- Font Manager -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon">🔤</div>
+                        <div class="product-info">
+                            <div class="product-name">Font Manager Pro</div>
+                            <div class="product-tag">Desktop App</div>
+                        </div>
+                    </div>
+                    <div class="product-img" id="imgFontManager">
+                        <span>📸 Hình sản phẩm sẽ cập nhật sau</span>
+                    </div>
+                    <p class="product-desc">
+                        Quản lý font chữ cực đã – bật/tắt font không cần cài bừa bãi, preview nhanh, 
+                        tạo bộ sưu tập theo dự án, search theo tên siêu nhanh, test text ngay.
+                    </p>
+                    <div class="product-features">
+                        <span class="product-feat">✅ Bật/tắt font</span>
+                        <span class="product-feat">🔍 Search nhanh</span>
+                        <span class="product-feat">📂 Folder/Tag</span>
+                        <span class="product-feat">👁️ Preview</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://drive.google.com/drive/folders/1DkbvtPBSGkOSkq51UVqAVBq-WgvWe5_l?usp=sharing" class="product-btn product-btn-primary" target="_blank" rel="noopener noreferrer">⬇️ Tải về</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="profile-footer fade-in">
+            <p class="footer-text">
+                Made with <span class="footer-heart">❤</span> by Hồ Lê Hưng · © 2026
+            </p>
+        </div>
+    </div>
+</body>
+</html>
